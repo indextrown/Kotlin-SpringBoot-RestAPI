@@ -3,6 +3,7 @@ package com.board.index
 import com.board.util.Logger
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -29,6 +30,7 @@ class BoardController(
         return boardService.getAll()
     }
 
+    // 요청 파라미터 방식(PathVariable 방식)
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): BoardDto {
         return boardService.getById(id)
@@ -37,5 +39,11 @@ class BoardController(
     @GetMapping("/{id}/nullable")
     fun getByIdOrNull(@PathVariable id: Long): BoardDto {
         return boardService.getByIdOrNull(id) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "게시글을 찾을 수 없습니다.")
+    }
+
+    // body 방식
+    @PatchMapping
+    fun update(@RequestBody boardDto: BoardDto) {
+        boardService.update(boardDto)
     }
 }

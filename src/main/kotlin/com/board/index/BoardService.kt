@@ -53,6 +53,15 @@ class BoardService (
         )
         return boardDto
     }
+
+    fun update(boardDto: BoardDto) {
+        val id = boardDto.id!! // 절대 null이 아니다
+        val boardEntity = boardRepository.findById(id).get()
+        boardEntity.update(boardDto)
+
+        // save는 jpa에서 영속성 컨텍스트 상으로 관리를 하므로 update시점에 자동으로 save되지만 명시적으로 호출
+        boardRepository.save(boardEntity)
+    }
 }
 
 /*

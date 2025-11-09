@@ -16,7 +16,12 @@ class BoardEntity(
     var content: String,
     val name: String,
     val createAt: LocalTime = LocalTime.now()
-)
+) {
+    fun update(boardDto: BoardDto) {
+        this.title = boardDto.title
+        this.content = boardDto.content
+    }
+}
 
 /*
 id: 자동생성된다(고유값)

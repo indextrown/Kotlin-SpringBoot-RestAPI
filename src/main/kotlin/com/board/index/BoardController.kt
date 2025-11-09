@@ -2,6 +2,7 @@ package com.board.index
 
 import com.board.util.Logger
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -45,5 +46,10 @@ class BoardController(
     @PatchMapping
     fun update(@RequestBody boardDto: BoardDto) {
         boardService.update(boardDto)
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteById(@PathVariable id: Long) {
+        boardService.deleteById(id)
     }
 }

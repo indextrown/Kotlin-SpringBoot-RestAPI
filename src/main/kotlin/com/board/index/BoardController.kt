@@ -1,6 +1,7 @@
 package com.board.index
 
 import com.board.util.Logger
+import io.swagger.v3.oas.annotations.Operation
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException
 class BoardController(
     private val boardService: BoardService
 ) {
+    @Operation(summary = "게시글 생성", description = "제목, 내용, 작성자를 입력받아 새 게시글을 생성합니다.")
     @PostMapping
     fun create(@RequestBody boardDto: BoardDto) {
         boardService.create(boardDto)
